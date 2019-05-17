@@ -1,0 +1,17 @@
+{
+  "name": "exucator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "firebase use default && firebase deploy --only functions"
+  },
+  "keywords": [
+    "execute",
+    "your",
+    "exuces"
+  ],
+  "author": "",
+  "license": "ISC"
+}
