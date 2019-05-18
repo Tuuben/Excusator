@@ -18,6 +18,7 @@
     "axios": "0.18.0",
     "firebase-admin": "7.0.0",
     "firebase-functions": "^2.3.0",
+    "puppeteer": "1.16.0",
     "puppeteer-core": "1.16.0"
   },
   "devDependencies": {

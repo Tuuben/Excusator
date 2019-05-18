@@ -4,7 +4,7 @@ import axios from 'axios';
 import { scrapeImagesForURL } from './image-scraper';
 
 
-export const generateExcuse = functions.https.onRequest(async (request, response) => {
+export const generateExcuse = functions.runWith({memory: '1GB'}).https.onRequest(async (request, response) => {
     response.set('Access-Control-Allow-Origin', '*');
 
     const { response_url, time } = request.body;
