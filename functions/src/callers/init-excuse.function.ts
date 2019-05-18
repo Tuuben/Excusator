@@ -13,8 +13,6 @@ export const initExcuse = functions
     const time = parseInt(args[0]);
     const formalMeeting = !!args[1];  
 
-    console.log('time', time, 'formal', formalMeeting)
-
     axios.post(
         'https://europe-west1-excusator-6c44b.cloudfunctions.net/generateExcuse',
         { response_url, user_name, time, formalMeeting }, 

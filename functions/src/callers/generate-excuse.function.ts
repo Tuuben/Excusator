@@ -15,13 +15,9 @@ export const generateExcuse = functions
     
     const excuseSentanceData = await getGeneratedSentance(time, user_name, formalMeeting);
 
-    console.log('exuce done ...');
-
     const { text, searchQuery } = excuseSentanceData;
 
     const image_url = await scrapeImagesForURL(searchQuery || '');
-
-    console.log('img gottten !');
 
     const discount = await getDiscountCode();
 
@@ -46,7 +42,7 @@ export const generateExcuse = functions
                         title: 'Here da proof 👇',
                         image_url
                     },
-                    discount ? discountAttachment : noDiscount
+                    discount && discount.code ? discountAttachment : noDiscount
                 ]
             }, 
             { responseType: 'application/json' }

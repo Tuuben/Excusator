@@ -9,3 +9,4 @@
 import './firebase-init';
 export { initExcuse } from './callers/init-excuse.function';
 export { generateExcuse } from './callers/generate-excuse.function';
+export { qrExcuse } from './callers/qr-excuse.function';

@@ -43,7 +43,6 @@ export async function scrapeImagesForURL(searchQuery: string){
     const cachedImage = await getCachedImage(searchQuery);
 
     if(!!cacheImage && cachedImage.imageURL){
-        console.log('fetched from dtata');
         return cachedImage && cachedImage.imageURL;
     }
 
