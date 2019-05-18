@@ -1,0 +1,102 @@
+@font-face {
+  font-family: fightThis;
+  src: url(assets/fonts/FIGHTT3_.ttf);
+}
+@font-face {
+  font-family: baskerville-bold;
+  src: url(assets/fonts/Baskerville\Bold.otf);
+}
+@font-face {
+  font-family: baskerville-semibold;
+  src: url(assets/fonts/Baskerville\SemiBold.ttf);
+}
+@font-face {
+  font-family: baskerville-bolditalic;
+  src: url(assets/fonts/Baskerville\Bold\Italic.otf);
+}
+@font-face {
+  font-family: keepOnTruckin;
+  src: url(assets/fonts/KeeponTruckin.ttf);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.red {
+  color: #d0021b;
+  background: none;
+  font-weight: bold;
+}
+
+.lightblue {
+  color: #0bc3ce;
+  background: none;
+  font-weight: bold;
+}
+
+.green {
+  color: #40d321;
+}
+.nav {
+  background-color: #00ea10;
+  border: 10px #f8e71c solid;
+  font-family: fightThis;
+  display: flex;
+}
+
+.nav-logo {
+  height: 50px;
+}
+
+.nav > * {
+  margin-right: 10px;
+}
+
+.ted-cruz {
+  background-image: url(assets/this\man\ate\my\son.jpg);
+  background-repeat: repeat-x;
+}
+
+.instructions {
+  padding: 10px 0px 10px 100px;
+  background-color: #fffbb2;
+}
+
+.instructions-head {
+  display: flex;
+  color: #020bd0;
+  text-decoration: underline;
+  font-family: FightThis;
+}
+
+.instructions-head img {
+  height: 300px;
+}
+
+.instructions-logo,
+.slack {
+  height: 30px;
+}
+
+.instructions-list {
+  font-family: keepOnTruckin;
+  color: #020bd0;
+}
+
+.seal {
+  height: 150px;
+  position: absolute;
+  top: 900px;
+  left: 0px;
+}
+
+.download {
+  background-image: url("assets/ted.png");
+  font-family: fightThis;
+  text-decoration: underline;
+  color: red;
+}
