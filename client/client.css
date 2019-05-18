@@ -26,6 +26,10 @@ body {
   padding: 0;
 }
 
+a {
+  color: black;
+}
+
 .cruz {
   background-image: url(assets/this\ man\ also\ ate\ my\ son.png);
   background-repeat: repeat-x;
