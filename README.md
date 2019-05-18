@@ -1,1 +1,1 @@
-# Exucator a Junction Stupidhack project
+# Excusator by The Hard a Junction Stupidhack project
