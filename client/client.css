@@ -32,6 +32,16 @@ body {
   height: 40px;
 }
 
+.videocontainer {
+  background-image: url(assets/1st\ image.png);
+  height: 300px;
+}
+
+.videocontainer img {
+  height: 100px;
+  margin-left: 40em;
+}
+
 .red {
   color: #d0021b;
   background: none;
@@ -101,7 +111,7 @@ body {
 .seal {
   height: 150px;
   position: absolute;
-  top: 800px;
+  top: 1000px;
   left: 0px;
 }
 
