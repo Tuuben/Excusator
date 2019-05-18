@@ -39,7 +39,7 @@ async function cacheImage(query: string, imageURL: string){
 
 export async function scrapeImagesForURL(searchQuery: string){
     const cachedImage = await getCachedImage(searchQuery);
-    console.log('my cached image ', cachedImage);
+
     if(!!cacheImage && cachedImage.imageURL){
         return cachedImage && cachedImage.imageURL;
     }
@@ -50,6 +50,7 @@ export async function scrapeImagesForURL(searchQuery: string){
     });
 
     const page = await browser.newPage();
+    
     await page.goto('https://images.search.yahoo.com/');
     
     await page.focus('#yschsp');

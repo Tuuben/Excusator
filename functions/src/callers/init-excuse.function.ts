@@ -18,5 +18,5 @@ export const initExcuse = functions.https.onRequest(async (request, response) =>
 
 
     response.statusCode = 200;
-    response.send(`Ta-ta generating response... Don't be afraid 🧙`)
+    response.send(`Ta-ta generating response... Don't be afraid, it might take a minute 🧙`)
 });

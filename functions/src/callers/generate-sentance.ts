@@ -8,14 +8,20 @@ export interface GeneratedSentanceData {
 
 interface Sentance {
     id?: string;
-    text?: string;
+    text?: string; 
+    type?: 'intro' | 'subject' | 'action' | 'object' | 'time';
+    value?: any;
 }
+
+const LIMIT = 200;
 
 async function getIntro() : Promise<string> {
     const query = await admin
     .firestore()
-    .collection('sentanceIntro')
-    .limit(100);
+    .collection('sentances')
+    .where('type', '==', 'intro')
+    .limit(LIMIT);
+
     const snapshot = await query.get();
     const intros = combineCollectionSnapshot(snapshot) as Sentance[];
 
@@ -30,8 +36,10 @@ async function getIntro() : Promise<string> {
 async function getSubject() : Promise<string> {
     const query = await admin
     .firestore()
-    .collection('sentanceSubject')
-    .limit(100);
+    .collection('sentances')
+    .where('type', '==', 'subject')
+    .limit(LIMIT);
+
     const snapshot = await query.get();
     const subjects = combineCollectionSnapshot(snapshot) as Sentance[];
 
@@ -46,8 +54,10 @@ async function getSubject() : Promise<string> {
 async function getAction() : Promise<string> {
     const query = await admin
     .firestore()
-    .collection('sentanceAction')
-    .limit(100);
+    .collection('sentances')
+    .where('type', '==', 'action')
+    .limit(LIMIT);
+
     const snapshot = await query.get();
     const actions = combineCollectionSnapshot(snapshot) as Sentance[];
 
@@ -63,8 +73,10 @@ async function getAction() : Promise<string> {
 async function getObject(): Promise<string> {
     const query = await admin
     .firestore()
-    .collection('sentanceObject')
-    .limit(100);
+    .collection('sentances')
+    .where('type', '==', 'object')
+    .limit(LIMIT);
+
     const snapshot = await query.get();
     const objects = combineCollectionSnapshot(snapshot) as Sentance[];
 
@@ -79,8 +91,10 @@ async function getObject(): Promise<string> {
 async function getTime() : Promise<string> {
     const query = await admin
     .firestore()
-    .collection('sentanceTime')
-    .limit(100);
+    .collection('sentances')
+    .where('type', '==', 'time')
+    .limit(LIMIT);
+
     const snapshot = await query.get();
     const times = combineCollectionSnapshot(snapshot) as Sentance[];
 
