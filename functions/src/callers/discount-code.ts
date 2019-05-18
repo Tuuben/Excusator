@@ -6,7 +6,6 @@ export async function getDiscountCode() {
     const res = await axios.get(`http://feed.linkmydeals.com/getOffers/?API_KEY=82748951bfa9d803d6e2be8661f2f9ff&format=json&last_extract_datetime=${ new Date(pastTenDays) }`);
 
     if(!res || !res.data || !res.data.results){
-        console.log('res ', res.data);
         return {};
     }
 
