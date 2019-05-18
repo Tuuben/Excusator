@@ -26,6 +26,12 @@ body {
   padding: 0;
 }
 
+.cruz {
+  background-image: url(assets/this\ man\ also\ ate\ my\ son.png);
+  background-repeat: repeat-x;
+  height: 40px;
+}
+
 .red {
   color: #d0021b;
   background: none;
@@ -87,11 +93,21 @@ body {
   color: #020bd0;
 }
 
+.companies {
+  height: 400px;
+  background-image: url("assets/approval.png");
+}
+
 .seal {
   height: 150px;
   position: absolute;
-  top: 900px;
+  top: 800px;
   left: 0px;
+}
+
+.excellence {
+  background-image: url("assets/excelence.png");
+  height: 280px;
 }
 
 .download {
@@ -99,4 +115,6 @@ body {
   font-family: fightThis;
   text-decoration: underline;
   color: red;
+  text-align: center;
+  padding: 50px;
 }
