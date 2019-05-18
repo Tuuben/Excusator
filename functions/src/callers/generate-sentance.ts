@@ -1,6 +1,11 @@
 import * as admin from 'firebase-admin';
 import { combineCollectionSnapshot } from '../firestore';
 
+export interface GeneratedSentanceData {
+    text?: string;
+    searchQuery?: string;
+}
+
 interface Sentance {
     id?: string;
     text?: string;
@@ -96,7 +101,12 @@ export async function getGeneratedSentance(minutes: number = 5) {
         getTime()
     ]);
 
-    const sentance = `${intro} ${subject} ${action} ${object} ${time} ${minutes || 'some amount of'} minutes!` 
+    const sentance: string = `${intro} ${subject} ${action} ${object}, ${time} ${minutes || 'some amount of'} minutes!` 
 
-    return sentance;
+    const data: GeneratedSentanceData = {
+        text: sentance,
+        searchQuery: object
+    };
+
+    return data;
 }

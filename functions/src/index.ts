@@ -6,6 +6,7 @@
 // export const helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
+'use-strict';
 import './firebase-init';
 export { initExcuse } from './callers/init-excuse.function';
 export { generateExcuse } from './callers/generate-excuse.function';

@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import { getGeneratedSentance } from './generate-sentance';
 import axios from 'axios';
-import { scrapeGoogleImagesForURL } from './google-image-scraper';
+import { scrapeImagesForURL } from './image-scraper';
 
 
 export const generateExcuse = functions.https.onRequest(async (request, response) => {
@@ -9,16 +9,18 @@ export const generateExcuse = functions.https.onRequest(async (request, response
 
     const { response_url, time } = request.body;
     
-    const excuseSentance = await getGeneratedSentance(time);
+    const excuseSentanceData = await getGeneratedSentance(time);
 
-    const image_url = await scrapeGoogleImagesForURL('retarded cat');
+    const { text, searchQuery } = excuseSentanceData;
+
+    const image_url = await scrapeImagesForURL(searchQuery || '');
 
     try{
         await axios.post(
             response_url,
             { 
                 response_type: "in_channel", 
-                text: excuseSentance,
+                text,
                 attachments: [
                     {
                         title: 'Related picture 👇',
@@ -32,5 +34,5 @@ export const generateExcuse = functions.https.onRequest(async (request, response
         console.error(err);
     }
 
-    response.send(excuseSentance);
+    response.send(text);
 });
