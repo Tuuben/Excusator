@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import { getGeneratedSentance } from './generate-sentance';
 import axios from 'axios';
 import { scrapeImagesForURL } from './image-scraper';
+import { getDiscountCode } from './discount-code';
 
 
 export const generateExcuse = functions
@@ -9,14 +10,21 @@ export const generateExcuse = functions
 .runWith({memory: '1GB'})
 .https.onRequest(async (request, response) => {
     response.set('Access-Control-Allow-Origin', '*');
+    response.set('Cache-Control', 'public, max-age=300, s-maxage=600');
 
-    const { response_url, time } = request.body;
+    const { response_url, user_name, time, formalMeeting } = request.body;
     
-    const excuseSentanceData = await getGeneratedSentance(time);
+    const excuseSentanceData = await getGeneratedSentance(time, user_name, formalMeeting);
+
+    console.log('exuce done ...');
 
     const { text, searchQuery } = excuseSentanceData;
 
     const image_url = await scrapeImagesForURL(searchQuery || '');
+
+    console.log('img gottten !');
+
+    const discount = await getDiscountCode();
 
     try{
         await axios.post(
@@ -26,8 +34,13 @@ export const generateExcuse = functions
                 text,
                 attachments: [
                     {
-                        title: 'Related picture 👇',
+                        title: 'Here da proof 👇',
                         image_url
+                    },
+                    {
+                        title: 'Anyways, sorry! Here is a discount code',
+                        title_link: discount.url,
+                        text: `CODE:${discount.code || '123'} to ${discount.store}`
                     }
                 ]
             }, 

@@ -2,38 +2,40 @@ import * as puppeteer from 'puppeteer';
 import * as admin from 'firebase-admin';
 
 interface QueryImage{
-    query?: string;
     imageURL?: string
 }
 
 async function getCachedImage(searchQuery: string) { 
-    const query = await admin
+    const id = searchQuery.toLowerCase().replace(/\s/g, '');
+
+    const ref = await admin
     .firestore()
     .collection('queryImages')
-    .where('query', '==', searchQuery)
-    .limit(1);  
+    .doc(id);
 
-    const snapshot = await query.get();
+    const snapshot = await ref.get();
 
-    if(snapshot.empty){
+    if(!snapshot || !snapshot.data()){
         return {};
     }
 
-    const image = snapshot.docs[0] as QueryImage;
+    const image = snapshot.data() as QueryImage;
 
     return image || {};
 }  
 
 async function cacheImage(query: string, imageURL: string){
+    const id = query.trim().toLowerCase().replace(/\s/g,'');
+
     const data: QueryImage = {
-        query,
         imageURL
     }   
 
     await admin
     .firestore()
     .collection('queryImages')
-    .add(data);
+    .doc(id)
+    .set(data);
 }
 
 
@@ -41,6 +43,7 @@ export async function scrapeImagesForURL(searchQuery: string){
     const cachedImage = await getCachedImage(searchQuery);
 
     if(!!cacheImage && cachedImage.imageURL){
+        console.log('fetched from dtata');
         return cachedImage && cachedImage.imageURL;
     }
 

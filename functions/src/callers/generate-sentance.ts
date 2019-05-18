@@ -15,11 +15,12 @@ interface Sentance {
 
 const LIMIT = 200;
 
-async function getIntro() : Promise<string> {
+async function getIntro(isFormal: boolean) : Promise<string> {
     const query = await admin
     .firestore()
     .collection('sentances')
     .where('type', '==', 'intro')
+    .where('value', '==', isFormal ? '1' : '0')
     .limit(LIMIT);
 
     const snapshot = await query.get();
@@ -33,11 +34,12 @@ async function getIntro() : Promise<string> {
     return intros[randomIndex].text || '';
 }
 
-async function getSubject() : Promise<string> {
+async function getSubject(isFormal: boolean) : Promise<string> {
     const query = await admin
     .firestore()
     .collection('sentances')
     .where('type', '==', 'subject')
+    .where('value', '==', isFormal ? '1' : '0')
     .limit(LIMIT);
 
     const snapshot = await query.get();
@@ -51,11 +53,12 @@ async function getSubject() : Promise<string> {
     return subjects[randomIndex].text || '';
 }
 
-async function getAction() : Promise<string> {
+async function getAction(isFormal: boolean) : Promise<string> {
     const query = await admin
     .firestore()
     .collection('sentances')
     .where('type', '==', 'action')
+    .where('value', '==', isFormal ? '1' : '0')
     .limit(LIMIT);
 
     const snapshot = await query.get();
@@ -70,11 +73,12 @@ async function getAction() : Promise<string> {
 }
 
 
-async function getObject(): Promise<string> {
+async function getObject(isFormal: boolean): Promise<string> {
     const query = await admin
     .firestore()
     .collection('sentances')
     .where('type', '==', 'object')
+    .where('value', '==', isFormal ? '1' : '0')
     .limit(LIMIT);
 
     const snapshot = await query.get();
@@ -88,11 +92,12 @@ async function getObject(): Promise<string> {
     return objects[randomIndex].text || '';
 }
 
-async function getTime() : Promise<string> {
+async function getTime(isFormal: boolean) : Promise<string> {
     const query = await admin
     .firestore()
     .collection('sentances')
     .where('type', '==', 'time')
+    .where('value', '==', isFormal ? '1' : '0')
     .limit(LIMIT);
 
     const snapshot = await query.get();
@@ -106,16 +111,16 @@ async function getTime() : Promise<string> {
     return times[randomIndex].text || '';
 } 
 
-export async function getGeneratedSentance(minutes: number = 5) {
+export async function getGeneratedSentance(minutes: number, userName: string = 'unknown', formalMeeting = false) {
     const [intro, subject, action, object, time] = await Promise.all([
-        getIntro(),
-        getSubject(),
-        getAction(),
-        getObject(),
-        getTime()
+        getIntro(formalMeeting),
+        getSubject(formalMeeting),
+        getAction(formalMeeting),
+        getObject(formalMeeting),
+        getTime(formalMeeting)
     ]);
 
-    const sentance: string = `${intro} ${subject} ${action} ${object}, ${time} ${minutes || 'some amount of'} minutes!` 
+    const sentance: string = `${intro} ${subject} ${action} ${object}, ${time} ${minutes || 'some amount of'} minutes! // ${userName}` 
 
     const data: GeneratedSentanceData = {
         text: sentance,
