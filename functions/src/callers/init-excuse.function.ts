@@ -2,7 +2,9 @@ import * as functions from 'firebase-functions';
 import axios from 'axios';
 
 
-export const initExcuse = functions.https.onRequest(async (request, response) => {
+export const initExcuse = functions
+.region('europe-west1')
+.https.onRequest(async (request, response) => {
     response.set('Access-Control-Allow-Origin', '*');
 
     const { response_url, text } = request.body;
