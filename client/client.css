@@ -135,3 +135,9 @@ li {
   text-align: center;
   padding: 50px;
 }
+
+.kjhkj {
+  background-image: url("assets/footer.png");
+  height: 300px;
+  background-position: center;
+}
