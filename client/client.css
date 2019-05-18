@@ -92,6 +92,9 @@ iframe {
   text-decoration: underline;
   font-family: FightThis;
 }
+li {
+  padding-left: 50px;
+}
 
 .instructions-head img {
   height: 300px;
@@ -115,7 +118,7 @@ iframe {
 .seal {
   height: 150px;
   position: absolute;
-  top: 1000px;
+  top: 80em;
   left: 0px;
 }
 
