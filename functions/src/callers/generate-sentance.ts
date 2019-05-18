@@ -120,7 +120,7 @@ export async function getGeneratedSentance(minutes: number, userName: string = '
         getTime(formalMeeting)
     ]);
 
-    const sentance: string = `${intro} ${subject} ${action} ${object}, ${time} ${minutes || 'some amount of'} minutes! // ${userName}` 
+    const sentance: string = `${intro} ${subject} ${action} ${object} ${time} ${minutes || 'some amount of'} minutes! // _${userName}_` 
 
     const data: GeneratedSentanceData = {
         text: sentance,

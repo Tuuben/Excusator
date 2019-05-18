@@ -10,7 +10,6 @@ export const generateExcuse = functions
 .runWith({memory: '1GB'})
 .https.onRequest(async (request, response) => {
     response.set('Access-Control-Allow-Origin', '*');
-    response.set('Cache-Control', 'public, max-age=300, s-maxage=600');
 
     const { response_url, user_name, time, formalMeeting } = request.body;
     
@@ -26,6 +25,16 @@ export const generateExcuse = functions
 
     const discount = await getDiscountCode();
 
+    const discountAttachment = {
+        title: 'Anyways, sorry! Here is a discount code to make up for all this trouble!',
+        title_link: discount.url,
+        text: `CODE:${discount.code || '123'} to ${discount.store || 'Teboil'}`
+    }
+
+    const noDiscount = {
+        title: `Anyways sorry! I would've given you a discount but our max api calls for the day has exceeded, so f*ck off.`
+    }
+
     try{
         await axios.post(
             response_url,
@@ -37,11 +46,7 @@ export const generateExcuse = functions
                         title: 'Here da proof 👇',
                         image_url
                     },
-                    {
-                        title: 'Anyways, sorry! Here is a discount code',
-                        title_link: discount.url,
-                        text: `CODE:${discount.code || '123'} to ${discount.store}`
-                    }
+                    discount ? discountAttachment : noDiscount
                 ]
             }, 
             { responseType: 'application/json' }
